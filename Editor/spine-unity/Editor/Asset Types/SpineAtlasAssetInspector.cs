@@ -136,7 +136,7 @@ namespace Spine.Unity.Editor {
 			if (SpineInspectorUtility.LargeCenteredButton(SpineInspectorUtility.TempContent("Set Mipmap Bias to " + SpinePreferences.DEFAULT_MIPMAPBIAS, tooltip: "This may help textures with mipmaps be less blurry when used for 2D sprites."))) {
 				foreach (var m in atlasAsset.materials) {
 					var texture = m.mainTexture;
-					string texturePath = AssetDatabase.GetAssetPath(texture.GetInstanceID());
+					string texturePath = AssetDatabase.GetAssetPath(texture);
 					var importer = (TextureImporter)TextureImporter.GetAtPath(texturePath);
 					importer.mipMapBias = SpinePreferences.DEFAULT_MIPMAPBIAS;
 					EditorUtility.SetDirty(texture);
@@ -312,12 +312,14 @@ namespace Spine.Unity.Editor {
 				atlasAsset.Clear();
 		}
 
-		static public void UpdateSpriteSlices (Texture texture, Atlas atlas) {
-			string texturePath = AssetDatabase.GetAssetPath(texture.GetInstanceID());
-			var t = (TextureImporter)TextureImporter.GetAtPath(texturePath);
-			t.spriteImportMode = SpriteImportMode.Multiple;
-			var spriteSheet = t.spritesheet;
-			var sprites = new List<SpriteMetaData>(spriteSheet);
+			static public void UpdateSpriteSlices (Texture texture, Atlas atlas) {
+				string texturePath = AssetDatabase.GetAssetPath(texture);
+				var t = (TextureImporter)TextureImporter.GetAtPath(texturePath);
+				t.spriteImportMode = SpriteImportMode.Multiple;
+		#pragma warning disable CS0618
+				var spriteSheet = t.spritesheet;
+		#pragma warning restore CS0618
+				var sprites = new List<SpriteMetaData>(spriteSheet);
 
 			var regions = SpineAtlasAssetInspector.GetRegions(atlas);
 			char[] FilenameDelimiter = {'.'};

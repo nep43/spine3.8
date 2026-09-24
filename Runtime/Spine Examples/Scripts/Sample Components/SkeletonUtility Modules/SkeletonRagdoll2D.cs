@@ -130,7 +130,10 @@ namespace Spine.Unity.Examples {
 			RecursivelyCreateBoneProxies(startingBone);
 
 			RootRigidbody = boneTable[startingBone].GetComponent<Rigidbody2D>();
-			RootRigidbody.isKinematic = pinStartBone;
+			if (pinStartBone)
+			{
+                RootRigidbody.bodyType = RigidbodyType2D.Kinematic;
+            }
 			RootRigidbody.mass = rootMass;
 			var boneColliders = new List<Collider2D>();
 			foreach (var pair in boneTable) {

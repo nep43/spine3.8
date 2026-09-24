@@ -123,8 +123,11 @@ namespace Spine.Unity {
 			var rb = gameObject.GetComponent<Rigidbody2D>();
 			if (rb == null) {
 				rb = gameObject.AddComponent<Rigidbody2D>();
-				rb.isKinematic = isKinematic;
-				rb.gravityScale = gravityScale;
+				if (isKinematic)
+				{
+					rb.bodyType = RigidbodyType2D.Kinematic;
+				}
+                    rb.gravityScale = gravityScale;
 			}
 			return rb;
 		}

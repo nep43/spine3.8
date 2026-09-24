@@ -51,7 +51,7 @@ using System.Text;
 using System.Linq;
 using System.Reflection;
 using System.Globalization;
-
+using UnityEditor.Build;
 namespace Spine.Unity.Editor {
 	public partial class SpineEditorUtilities {
 		public static class SpineTK2DEditorUtility {
@@ -100,7 +100,8 @@ namespace Spine.Unity.Editor {
 				if (IsInvalidGroup(group))
 					continue;
 
-				string defines = PlayerSettings.GetScriptingDefineSymbolsForGroup(group);
+				NamedBuildTarget namedBuildTarget = NamedBuildTarget.FromBuildTargetGroup(group);
+				string defines = PlayerSettings.GetScriptingDefineSymbols(namedBuildTarget);
 				if (!defines.Contains(define)) {
 					wasDefineAdded = true;
 					if (defines.EndsWith(";", System.StringComparison.Ordinal))
@@ -108,7 +109,7 @@ namespace Spine.Unity.Editor {
 					else
 						defines += ";" + define;
 
-					PlayerSettings.SetScriptingDefineSymbolsForGroup(group, defines);
+					PlayerSettings.SetScriptingDefineSymbols(namedBuildTarget, defines);
 				}
 			}
 			Debug.LogWarning("Please ignore errors \"PlayerSettings Validation: Requested build target group doesn't exist\" above");
@@ -129,7 +130,8 @@ namespace Spine.Unity.Editor {
 				if (IsInvalidGroup(group))
 					continue;
 
-				string defines = PlayerSettings.GetScriptingDefineSymbolsForGroup(group);
+				NamedBuildTarget namedBuildTarget = NamedBuildTarget.FromBuildTargetGroup(group);
+				string defines = PlayerSettings.GetScriptingDefineSymbols(namedBuildTarget);
 				if (defines.Contains(define)) {
 					wasDefineRemoved = true;
 					if (defines.Contains(define + ";"))
@@ -137,7 +139,7 @@ namespace Spine.Unity.Editor {
 					else
 						defines = defines.Replace(define, "");
 
-					PlayerSettings.SetScriptingDefineSymbolsForGroup(group, defines);
+					PlayerSettings.SetScriptingDefineSymbols(namedBuildTarget, defines);
 				}
 			}
 

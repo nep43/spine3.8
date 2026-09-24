@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
   m_Name: eyes_Atlas
   m_EditorClassIdentifier: 
-  atlasFile: {fileID: 4900000, guid: d2899150110e7384badaef80d9f784ee, type: 3}
+  atlasFile: {fileID: 4900000, guid: 6e6efaf472c9b894c95bc54d564ebbcd, type: 3}
   materials:
-  - {fileID: 2100000, guid: 4f9d106a1e4d45b468b980311947a225, type: 2}
+  - {fileID: 2100000, guid: 252ab24e3380a794e9369883b2859695, type: 2}

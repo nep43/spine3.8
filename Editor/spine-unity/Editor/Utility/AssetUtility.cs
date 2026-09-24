@@ -449,7 +449,7 @@ namespace Spine.Unity.Editor {
 									skeletonDataAtlasAssets[i].Equals(null) &&
 									skeletonDataAtlasAssets[i].GetInstanceID() != 0
 								) {
-									skeletonDataAtlasAssets[i] = EditorUtility.InstanceIDToObject(skeletonDataAtlasAssets[i].GetInstanceID()) as AtlasAssetBase;
+									skeletonDataAtlasAssets[i] = EditorUtility.EntityIdToObject(skeletonDataAtlasAssets[i].GetInstanceID()) as AtlasAssetBase;
 								}
 							}
 						}
